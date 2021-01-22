@@ -15,7 +15,7 @@ const routes: RouteConfig[] = [
         children: [
           {
             path: 'library/:id',
-            component: () => import('pages/Index.vue'),
+            component: () => import('pages/LibraryDetail.vue'),
           },
         ],
       },
