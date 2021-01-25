@@ -10,6 +10,7 @@
 /* eslint global-require: 0 */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { configure } = require('quasar/wrappers');
+const path = require('path');
 
 module.exports = configure((ctx) => ({
   // https://quasar.dev/quasar-cli/supporting-ts
@@ -26,6 +27,7 @@ module.exports = configure((ctx) => ({
   // --> boot files are part of "main.js"
   // https://quasar.dev/quasar-cli/boot-files
   boot: [
+    'errorHandler',
     'composition-api',
   ],
 
@@ -100,13 +102,20 @@ module.exports = configure((ctx) => ({
     https: false,
     port: 8080,
     open: true, // opens browser window automatically
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3004',
+        pathRewrite: { '^/api': '' },
+        secure: false,
+        changeOrigin: true,
+      },
+    },
   },
 
   // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
   framework: {
     iconSet: 'material-icons', // Quasar icon set
     lang: 'en-us', // Quasar language pack
-    config: {},
 
     // Possible values for "importStrategy":
     // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -121,7 +130,14 @@ module.exports = configure((ctx) => ({
     // directives: [],
 
     // Quasar plugins
-    plugins: [],
+    plugins: [
+      'Notify',
+    ],
+    config: {
+      notify: {
+        actions: [{ icon: 'close', color: 'white' }],
+      },
+    },
   },
 
   // animations: 'all', // --- includes all animations
