@@ -3,6 +3,7 @@
     <q-pagination
       v-if="page && maxPages"
       v-model="page"
+      input
       :max="maxPages"
       :max-pages="5"
       :direction-links="true"

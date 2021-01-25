@@ -27,9 +27,11 @@ class LibraryList extends VuexModule implements LibraryListInterface {
   public async getItems(params: SearchParams) {
     const response = await getLibrariesList(params);
     this.SET_ITEMS(response.data);
-    const totalPages = getTotalPagesFromHeaders(response.headers);
-    if (totalPages) {
-      this.SET_TOTAL_PAGES(totalPages);
+    if (this.totalPages === null) {
+      const totalPages = getTotalPagesFromHeaders(response.headers);
+      if (totalPages) {
+        this.SET_TOTAL_PAGES(totalPages);
+      }
     }
   }
 
