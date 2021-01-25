@@ -1,5 +1,5 @@
 <template>
-  <div class="filters">
+  <div class="filters q-pa-md">
     Filters
   </div>
 </template>
