@@ -12,12 +12,16 @@ const routes: RouteConfig[] = [
       {
         path: 'library-list',
         component: () => import('pages/LibraryList.vue'),
-        children: [
-          {
-            path: 'library/:id',
-            component: () => import('pages/LibraryDetail.vue'),
-          },
-        ],
+      },
+    ],
+  },
+  {
+    path: '/library/:id',
+    component: () => import('layouts/DetailLayout.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('pages/LibraryDetail.vue'),
       },
     ],
   },
