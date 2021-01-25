@@ -21,6 +21,7 @@ import LibraryCard from 'components/LibraryCard.vue';
 import Pagination from 'components/Pagination.vue';
 import { queryParamsModule } from 'store/modules/queryParams';
 import { libraryListModule } from 'store/modules/libraryList';
+import { SearchParams } from 'models/filters';
 
 export default defineComponent({
   name: 'LibraryList',
@@ -43,6 +44,11 @@ export default defineComponent({
     watch(searchParams, getLibraries);
 
     return { loading, getLibraries, libraries };
+  },
+  created() {
+    if (this.$route.query) {
+      queryParamsModule.initParams(this.$route.query as SearchParams);
+    }
   },
 });
 </script>
