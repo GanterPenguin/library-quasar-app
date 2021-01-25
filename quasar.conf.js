@@ -70,6 +70,19 @@ module.exports = configure((ctx) => ({
 
     // https://quasar.dev/quasar-cli/handling-webpack
     extendWebpack(cfg) {
+      cfg.resolve.alias = {
+        ...cfg.resolve.alias, // This adds the existing alias
+
+        api: path.resolve(__dirname, './src/api'),
+        store: path.resolve(__dirname, './src/store'),
+        css: path.resolve(__dirname, './src/css'),
+        router: path.resolve(__dirname, './src/router'),
+        lib: path.resolve(__dirname, './src/lib'),
+        models: path.resolve(__dirname, './src/models'),
+        mixins: path.resolve(__dirname, './src/mixins'),
+        dictionaries: path.resolve(__dirname, './src/dictionaries'),
+      };
+
       // linting is slow in TS projects, we execute it only for production builds
       if (ctx.prod) {
         cfg.module.rules.push({
