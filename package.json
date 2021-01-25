@@ -6,17 +6,24 @@
   "author": "Ivan Buldakov <iv081198@yandex.ru>",
   "private": true,
   "scripts": {
+    "start": "npm-run-all --parallel dev server",
     "dev": "quasar dev",
     "build": "quasar build -m spa",
+    "server": "yarn json-server https://storage.yandexcloud.net/ganteru-dev/libraries.json --port 3004 --id nativeId",
     "lint": "eslint --ext .js,.ts,.vue ./",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "@types/lodash": "^4.14.168",
     "@vue/composition-api": "^0.6.4",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "json-server": "^0.16.3",
+    "lodash": "^4.17.20",
     "quasar": "^1.0.0",
-    "typescript": "4.1.2"
+    "typescript": "4.1.2",
+    "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
@@ -28,7 +35,8 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-vue": "^6.1.2"
+    "eslint-plugin-vue": "^6.1.2",
+    "npm-run-all": "^4.1.5"
   },
   "browserslist": [
     "last 10 Chrome versions",
