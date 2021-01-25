@@ -1,49 +1,48 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page class="q-pa-sm row justify-center q-gutter-md">
+    <library-card
+      v-for="library in libraries"
+      :key="library._id"
+      :library="library"
+    />
+
+    <pagination/>
   </q-page>
 </template>
 
 <script lang="ts">
-import { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/CompositionComponent.vue';
-import { defineComponent, ref } from '@vue/composition-api';
+import {
+  computed,
+  defineComponent,
+  ref,
+  watch,
+} from '@vue/composition-api';
+import LibraryCard from 'components/LibraryCard.vue';
+import Pagination from 'components/Pagination.vue';
+import { queryParamsModule } from 'store/modules/queryParams';
+import { libraryListModule } from 'store/modules/libraryList';
 
 export default defineComponent({
-  name: 'PageIndex',
-  components: { ExampleComponent },
+  name: 'LibraryList',
+  components: {
+    LibraryCard,
+    Pagination,
+  },
   setup() {
-    const todos = ref<Todo[]>([
-      {
-        id: 1,
-        content: 'ct1',
-      },
-      {
-        id: 2,
-        content: 'ct2',
-      },
-      {
-        id: 3,
-        content: 'ct3',
-      },
-      {
-        id: 4,
-        content: 'ct4',
-      },
-      {
-        id: 5,
-        content: 'ct5',
-      },
-    ]);
-    const meta = ref<Meta>({
-      totalCount: 1200,
-    });
-    return { todos, meta };
+    const searchParams = computed(() => queryParamsModule.params);
+    const loading = ref(false);
+
+    const libraries = computed(() => libraryListModule.items);
+    const getLibraries = async () => {
+      loading.value = true;
+      await libraryListModule.getItems(searchParams.value);
+      loading.value = false;
+    };
+    void getLibraries();
+
+    watch(searchParams, getLibraries);
+
+    return { loading, getLibraries, libraries };
   },
 });
 </script>
