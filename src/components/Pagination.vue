@@ -23,8 +23,8 @@ export default defineComponent({
     const page = computed({
       get() {
         if (queryParamsModule.params._page) {
-          const page = queryParamsModule.params._page;
-          return typeof page === 'string' ? parseInt(page, 10) : page as number;
+          const { _page } = queryParamsModule.params;
+          return typeof _page === 'string' ? parseInt(_page, 10) : _page as number;
         }
         return 1;
       },
