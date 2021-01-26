@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-sm row justify-center q-gutter-md">
+  <q-page class="q-pa-sm row justify-center q-gutter-md relative-position">
     <library-card
       v-for="library in libraries"
       :key="library._id"
@@ -7,6 +7,12 @@
     />
 
     <pagination/>
+
+    <q-inner-loading :showing="loading">
+      <div class="absolute-top window-height full-width">
+        <q-spinner size="50px" color="primary" class="absolute-center"/>
+      </div>
+    </q-inner-loading>
   </q-page>
 </template>
 
