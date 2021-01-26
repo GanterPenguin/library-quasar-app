@@ -81,6 +81,7 @@ module.exports = {
     'prefer-promise-reject-errors': 'off',
     'no-underscore-dangle': 'off',
     'no-void': 'off',
+    'class-methods-use-this': 'off',
 
     // TypeScript
     quotes: ['warn', 'single', { avoidEscape: true }],
