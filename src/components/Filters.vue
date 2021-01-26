@@ -15,7 +15,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from '@vue/composition-api';
+import {
+  defineComponent,
+  ref,
+  watch,
+  onBeforeMount,
+} from '@vue/composition-api';
+import { useRoute } from 'lib/utils';
+import { SearchParams } from 'models/filters';
 import { debounce } from 'quasar';
 import { queryParamsModule } from 'store/modules/queryParams';
 
@@ -25,7 +32,7 @@ export default defineComponent({
     const filters = ref({
       q: null,
       _sort: null,
-    });
+    } as SearchParams);
 
     const applyFilters = debounce(() => {
       queryParamsModule.updateParams({ ...filters.value });
@@ -55,6 +62,16 @@ export default defineComponent({
         value: 'data.general.id',
       },
     ];
+
+    onBeforeMount(() => {
+      const route = useRoute();
+      if (route.query.q) {
+        filters.value.q = route.query.q as string;
+      }
+      if (route.query._sort) {
+        filters.value._sort = route.query._sort as string;
+      }
+    });
 
     return { filters, applyFilters, sortOptions };
   },
