@@ -1,7 +1,7 @@
 <template>
-  <div class="library-detail relative-position">
+  <div class="library-detail relative-position flex justify-center">
     <q-inner-loading size="50px" color="primary" :showing="loading"/>
-    <q-card v-if="library" flat>
+    <q-card v-if="library" flat class="library-detail__card">
       <q-card-section class="q-mb-sm">
         <library-carousel
           :gallery="library.data.general.gallery"
@@ -92,6 +92,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.library-detail {
+  &__card {
+    max-width: 100%;
+
+    @media screen and (min-width: $breakpoint-md-max) {
+      max-width: 80vw;
+    }
+  }
+}
+
 .properties {
   margin: 0;
   display: flex;
