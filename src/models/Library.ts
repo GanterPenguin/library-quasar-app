@@ -22,7 +22,7 @@ export interface Tag {
 
 export interface Library {
   _id: string;
-  nativeId: number;
+  nativeId: string;
   data: {
     info: unknown;
     general: {

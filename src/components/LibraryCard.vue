@@ -63,7 +63,7 @@ export default defineComponent({
       return `${cleanString.slice(0, 100)}...`;
     });
 
-    const getDetailLink = (id: number) => `/library/${id}`;
+    const getDetailLink = (id: string) => `/library/${id}`;
 
     return { hasWebsite, description, getDetailLink };
   },
