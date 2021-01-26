@@ -38,13 +38,13 @@ export interface Library {
       };
       gallery?: Image[];
       image?: Image;
-    };
-    tags: Tag[];
-    workingSchedule: {
-      [key: string]: {
-        from: string;
-        to: string;
-      }
+      tags: Tag[];
+      workingSchedule: {
+        [key: string]: {
+          from: string;
+          to: string;
+        }
+      };
     };
   };
 }
