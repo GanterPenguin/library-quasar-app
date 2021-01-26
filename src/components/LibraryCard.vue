@@ -2,6 +2,7 @@
   <q-card bordered class="library-card">
     <router-link :to="getDetailLink(library.nativeId)">
     <q-img
+      class="library-card__img"
       :src="library.data.general.image ? library.data.general.image.url : '/no-img-placeholder.png'"
       :ratio="4/3"
       basic
@@ -72,11 +73,15 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .library-card {
-  max-height: 410px;
+  display: flex;
+  flex-direction: column;
+
+  &__img {
+    flex-grow: 2;
+  }
 
   &__description {
-    max-height: 140px;
-    height: 100%;
+    flex-shrink: 2;
     overflow: auto;
   }
 
