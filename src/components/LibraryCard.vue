@@ -60,7 +60,7 @@ export default defineComponent({
     const description = computed(() => {
       const regex = /<\/?[^>]+(>|$)/g;
       const cleanString = props.library.data.general.description.replace(regex, '');
-      return `${cleanString.slice(0, 100)}...`;
+      return `${cleanString.slice(0, 150)}...`;
     });
 
     const getDetailLink = (id: string) => `/library/${id}`;
