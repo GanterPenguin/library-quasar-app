@@ -1,12 +1,16 @@
 <template>
-  <q-page class="q-pa-sm row justify-center q-gutter-md relative-position">
-    <library-card
-      v-for="library in libraries"
-      :key="library._id"
-      :library="library"
-    />
+  <q-page class="q-pa-sm row justify-center relative-position">
+    <div class="row q-gutter-md">
+      <library-card
+        v-for="library in libraries"
+        :key="library._id"
+        :library="library"
+      />
+    </div>
 
-    <pagination/>
+    <div class="row">
+      <pagination/>
+    </div>
 
     <q-inner-loading :showing="loading">
       <div class="absolute-top window-height full-width">
