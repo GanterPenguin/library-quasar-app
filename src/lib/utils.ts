@@ -5,6 +5,7 @@ export function removeEmpty(obj: Record<string, unknown>) {
     if (val && typeof val === 'object') removeEmpty(val as Record<string, unknown>);
     else if (val === null || val === undefined) delete obj[key];
     if (Array.isArray(val) && val.length === 0) delete obj[key];
+    if (typeof val === 'string' && val.length === 0) delete obj[key];
   });
 }
 
