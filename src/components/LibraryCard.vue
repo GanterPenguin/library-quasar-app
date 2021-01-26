@@ -72,6 +72,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .library-card {
+  max-height: 410px;
+
   &__description {
     max-height: 140px;
     height: 100%;
