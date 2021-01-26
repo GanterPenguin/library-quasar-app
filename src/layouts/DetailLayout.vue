@@ -11,7 +11,7 @@
           @click="$router.back()"
         />
         <q-toolbar-title>
-          Деталка библиотеки
+          {{ title }}
         </q-toolbar-title>
 
       </q-toolbar>
@@ -25,9 +25,15 @@
 
 <script lang="ts">
 
-import { defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from '@vue/composition-api';
+import { libraryListModule } from 'store/modules/libraryList';
 
 export default defineComponent({
   name: 'DetailLayout',
+  setup() {
+    const title = computed(() => libraryListModule.title);
+
+    return { title };
+  },
 });
 </script>

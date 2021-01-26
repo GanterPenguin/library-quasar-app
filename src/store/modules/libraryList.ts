@@ -23,6 +23,14 @@ class LibraryList extends VuexModule implements LibraryListInterface {
 
   public totalPages: number | null = null;
 
+  public title: string | null = 'Загрузка...';
+
+  // eslint-disable-next-line @typescript-eslint/require-await
+  @MutationAction({ mutate: ['title'] })
+  public async setTitle(title: string) {
+    return { title };
+  }
+
   @Action
   public async getItems(params: SearchParams) {
     const response = await getLibrariesList(params);
