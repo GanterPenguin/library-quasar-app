@@ -1,3 +1,5 @@
+import { getCurrentInstance } from '@vue/composition-api';
+
 export function removeEmpty(obj: Record<string, unknown>) {
   Object.entries(obj).forEach(([key, val]) => {
     if (val && typeof val === 'object') removeEmpty(val as Record<string, unknown>);
@@ -23,4 +25,11 @@ export function getTotalPagesFromHeaders(headers: Record<string, string>) {
     }
   }
   throw new Error('Ошибка при получении количества страниц');
+}
+
+export function useRoute() {
+  const vm = getCurrentInstance();
+  if (!vm) throw new Error('must be called in setup');
+
+  return vm.$route;
 }

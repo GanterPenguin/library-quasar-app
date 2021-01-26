@@ -1,5 +1,5 @@
 import {
-  VuexModule, Module, Action, Mutation, getModule,
+  VuexModule, Module, Action, Mutation, getModule, MutationAction,
 } from 'vuex-module-decorators';
 import store from 'store/index';
 import { Library } from 'models/Library';
@@ -24,6 +24,10 @@ class LibraryList extends VuexModule implements LibraryListInterface {
   public totalPages: number | null = null;
 
   public title: string | null = 'Загрузка...';
+
+  public get itemById() {
+    return (id: string) => this.items.find((item) => item.nativeId === id);
+  }
 
   // eslint-disable-next-line @typescript-eslint/require-await
   @MutationAction({ mutate: ['title'] })
