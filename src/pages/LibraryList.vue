@@ -32,6 +32,7 @@ import Pagination from 'components/Pagination.vue';
 import { queryParamsModule } from 'store/modules/queryParams';
 import { libraryListModule } from 'store/modules/libraryList';
 import { SearchParams } from 'models/filters';
+import { debounce } from 'quasar';
 
 export default defineComponent({
   name: 'LibraryList',
@@ -44,11 +45,11 @@ export default defineComponent({
     const loading = ref(false);
 
     const libraries = computed(() => libraryListModule.items);
-    const getLibraries = async () => {
+    const getLibraries = debounce(async () => {
       loading.value = true;
       await libraryListModule.getItems(searchParams.value);
       loading.value = false;
-    };
+    }, 300);
     void getLibraries();
 
     watch(searchParams, getLibraries);
